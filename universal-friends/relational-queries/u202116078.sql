@@ -28,7 +28,7 @@ begin
 end
 go
 -- cantidad de estuduantes según la carrera
-select codigo_carrera as Carrera, dbo.f_cantidad_estudiantes_por_carrera(1) as Cantidad
+select codigo_carrera as Carrera, dbo.f_cantidad_estudiantes_por_carrera(3) as Cantidad
 from usuarios
-where codigo_carrera = 1
+where codigo_carrera = 3
 go
