@@ -21,9 +21,9 @@ begin
 
 		declare @cantidad int
 		set @cantidad = (select count(codigo)
-								from usuarios
-								where codigo_carrera = @carrera
-								group by codigo)
+				from usuarios
+				where codigo_carrera = @carrera
+				group by codigo)
 		return @cantidad
 end
 go
