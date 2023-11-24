@@ -4,8 +4,8 @@ db.usuarios.find({
         $in: ["Programación", "Fotografía"]
     }
 })
-// Obtener la puntuación máxima y mínima para un docente específico 
+// Obtener el número total de valoraciones para un curso específico 
 db.valoraciones.aggregate([
-  { $match: { codigo_docente_valorado: 3 } },
-  { $group: { _id: null, max_puntuacion: { $max: "$puntuacion" }, min_puntuacion: { $min: "$puntuacion" } } }
+  { $match: { curso: 'Economía' } },
+  { $group: { _id: null, total_valoraciones: { $sum: 1 } } }
 ])
