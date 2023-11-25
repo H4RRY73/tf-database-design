@@ -8,12 +8,23 @@ db.valoraciones.aggregate([
     }
 ]);
 
-// Obtener la cantida de usuarios por carrera
-db.usuarios.aggregate([
-    {
-       $group: {
-          _id: "$carrera",
-          cantidad_usuarios: { $sum: 1 }
-       }
-    }
+// Obtener el nombre del docente y la puntacion de este
+db.docentes.aggregate([
+   {
+      $lookup: {
+         from: "valoraciones",
+         localField: "_id",
+         foreignField: "codigo_docente_valorado",
+         as: "valoraciones"
+      }
+   },
+   {
+      $project: {
+         _id: 0,
+         nombre_docente: "$nombre",
+         puntuacion_promedio: {
+            $avg: "$valoraciones.puntuacion"
+         }
+      }
+   }
 ]);
