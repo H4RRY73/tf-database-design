@@ -4,8 +4,9 @@ db.usuarios.find({
         $in: ["Programación", "Fotografía"]
     }
 })
-// Obtener el número total de valoraciones para un curso específico 
+
+// Obtener la lista de cursos únicos que han sido valorados
 db.valoraciones.aggregate([
-  { $match: { curso: 'Economía' } },
-  { $group: { _id: null, total_valoraciones: { $sum: 1 } } }
+  { $group: { _id: null, cursos: { $addToSet: "$curso" } } },
+  { $project: { _id: 0, cursos: 1 } }
 ])
