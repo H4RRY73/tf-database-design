@@ -1,3 +1,5 @@
+--AVISO--
+--Problema con la cuenta de Italo en el Git, es por eso que Mathias lo sube por él
 /* Buscar Carreras Seleccionadas */
  db.usuarios.aggregate([
     {
@@ -16,7 +18,8 @@
     {
       $group: {
         _id: "$carrera",
-        cantidad: { $sum: 1 }
+        cantidad: { $count: {} }
       }
     }
   ]);
+
