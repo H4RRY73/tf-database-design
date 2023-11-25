@@ -12,11 +12,11 @@
   ]);
 
   /*Contar Cantidad de usuarios por carrera */
-  db.usuarios.aggregate([
+db.usuarios.aggregate([
     {
       $group: {
         _id: "$carrera",
-        cantidad: { $sum: 1 }
+        cantidad: { $count: {} }
       }
     }
   ]);
