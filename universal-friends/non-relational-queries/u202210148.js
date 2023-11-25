@@ -1,13 +1,27 @@
 
-/*Mostrar Apellido Paterno del Docente */
-db.docentes.aggregate([
+  db.docentes.aggregate([
     {
-      $project: {
-        _id: 0,
-        apellido_paterno: 1
+      $lookup: {
+        from: "valoraciones",
+        localField: "_id",
+        foreignField: "codigo_docente_valorado",
+        as: "valoraciones"
       }
+    },
+    {
+      $group: {
+        _id: "$_id",
+        nombre: { $first: "$nombre" },
+        apellido_paterno: { $first: "$apellido_paterno" },
+        apellido_materno: { $first: "$apellido_materno" },
+        puntuacion_promedio: { $avg: "$valoraciones.puntuacion" },
+        cantidad_valoraciones: { $sum: 1 }
+      }
+    },
+    {
+      $sort: { puntuacion_promedio: -1 }
     }
-]);
+  ]);
 
 
 /*Mostrar a todos los docentes */
