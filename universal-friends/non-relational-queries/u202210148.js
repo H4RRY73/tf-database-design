@@ -1,13 +1,16 @@
-/*Mostrar la cantidad de usuarios por carrera y género utilizando */
+
 db.usuarios.aggregate([
-    {
-      $group: {
-        _id: { carrera: "$carrera", genero: "$genero" },
-        cantidad: { $count: {} }
-      }
+  {
+    $group: {
+      _id: { $year: "$fecha_registro" },
+      cantidad: { $count: {} }
     }
-  ]);
-  ]);
+  },
+  {
+    $sort: { _id: 1 }
+  }
+]);
+
 
 
 /*Mostrar a todos los docentes */
